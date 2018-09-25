@@ -45,5 +45,22 @@ namespace DatabaseApp
 
             cn.Close();
         }
+
+        private void SeeEmployees_Click(object sender, RoutedEventArgs e)
+        {
+            string query = "select * from Employees";
+            OleDbCommand cmd = new OleDbCommand(query, cn);
+            cn.Open();
+            OleDbDataReader read = cmd.ExecuteReader();
+            string data = "";
+            while (read.Read())
+            {
+                data += read[0].ToString() + "\t" + read[1].ToString() + "\t" + read[2].ToString() + "\n";
+            }
+
+            myText2.Text = data;
+
+            cn.Close();
+        }
     }
 }
